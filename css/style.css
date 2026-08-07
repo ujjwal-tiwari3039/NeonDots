@@ -1,0 +1,216 @@
+:root {
+    --bg-color: #050510;
+    --text-primary: #ffffff;
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ff;
+    --neon-cyan: #0ff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    overflow: hidden;
+    touch-action: none; /* Prevent scroll on touch devices */
+}
+
+#gameCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+/* UI Screens */
+.ui-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background: rgba(5, 5, 16, 0.7);
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.ui-screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#hud {
+    background: transparent;
+    backdrop-filter: none;
+    justify-content: space-between;
+    padding: 20px;
+    z-index: 5;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+.pointer-events-auto {
+    pointer-events: auto;
+}
+
+.hud-top, .hud-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.hud-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Typography & Neon Effects */
+.neon-text {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px var(--neon-cyan),
+        0 0 40px var(--neon-cyan),
+        0 0 80px var(--neon-cyan);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.title {
+    font-size: 5rem;
+    animation: pulsate 2s infinite alternate;
+}
+
+@keyframes pulsate {
+    100% {
+        text-shadow: 
+            0 0 4px #fff,
+            0 0 11px #fff,
+            0 0 19px #fff,
+            0 0 40px var(--neon-pink),
+            0 0 80px var(--neon-pink),
+            0 0 90px var(--neon-pink),
+            0 0 100px var(--neon-pink);
+    }
+    0% {
+        text-shadow: 
+            0 0 2px #fff,
+            0 0 4px #fff,
+            0 0 6px #fff,
+            0 0 10px var(--neon-blue),
+            0 0 45px var(--neon-blue),
+            0 0 55px var(--neon-blue),
+            0 0 70px var(--neon-blue);
+    }
+}
+
+.stats-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 3rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.stats-box p {
+    margin: 10px 0;
+}
+
+/* Buttons */
+.neon-btn {
+    background: transparent;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 15px 40px;
+    margin: 10px;
+    border: 2px solid var(--neon-cyan);
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), inset 0 0 15px rgba(0, 255, 255, 0.2);
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+
+.neon-btn.small {
+    font-size: 1.2rem;
+    padding: 10px 25px;
+}
+
+.neon-btn:hover {
+    background: var(--neon-cyan);
+    color: var(--bg-color);
+    box-shadow: 0 0 30px var(--neon-cyan), inset 0 0 10px rgba(255, 255, 255, 0.5);
+    text-shadow: none;
+    transform: scale(1.05);
+}
+
+.neon-btn:active {
+    transform: scale(0.95);
+}
+
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 800px;
+    width: 90%;
+}
+
+.mode-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+    background: rgba(0, 243, 255, 0.2);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.mode-btn.selected {
+    background: var(--neon-cyan);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--neon-cyan);
+    font-weight: bold;
+}
+

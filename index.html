@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Neon Dots</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Main Menu / Mode Select -->
+    <div id="mainMenu" class="ui-screen active">
+        <h1 class="neon-text title" style="margin-bottom: 1rem; font-size: 4rem;">Neon Dots</h1>
+        <h3 style="margin-bottom: 2rem; color: #aaa;">Select Game Mode</h3>
+
+        <div class="mode-grid" id="modeGrid">
+            <!-- Buttons injected by JS -->
+        </div>
+
+        <div class="stats-box" style="margin-top: 2rem;">
+            <p><span id="selectedModeName">Pattern Mode</span></p>
+            <p>Best Score: <span id="menuBestScore">0</span></p>
+        </div>
+        <button id="playBtn" class="neon-btn">Play</button>
+    </div>
+
+    <!-- HUD -->
+    <div id="hud" class="ui-screen hidden pointer-events-none">
+        <div class="hud-top">
+            <div class="hud-item">Score: <span id="hudScore">0</span></div>
+            <div class="hud-item">Time: <span id="hudTime">0:00</span></div>
+        </div>
+        <div class="hud-bottom">
+            <div class="hud-item">Level: <span id="hudLevel">1</span></div>
+            <button id="pauseBtn" class="neon-btn small pointer-events-auto">Pause</button>
+        </div>
+    </div>
+
+    <!-- Pause Menu -->
+    <div id="pauseMenu" class="ui-screen hidden">
+        <h2 class="neon-text">Paused</h2>
+        <button id="resumeBtn" class="neon-btn">Resume</button>
+        <button id="restartBtn" class="neon-btn">Restart</button>
+        <button id="mainMenuBtn" class="neon-btn">Main Menu</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverMenu" class="ui-screen hidden">
+        <h2 class="neon-text">Game Over</h2>
+        <div class="stats-box">
+            <p>Score: <span id="gameOverScore">0</span></p>
+            <p>Best Score: <span id="gameOverBestScore">0</span></p>
+            <p>Time Survived: <span id="gameOverTime">0:00</span></p>
+        </div>
+        <button id="playAgainBtn" class="neon-btn">Play Again</button>
+        <button id="gameOverMainMenuBtn" class="neon-btn">Main Menu</button>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
