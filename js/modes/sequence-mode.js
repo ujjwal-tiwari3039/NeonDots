@@ -76,13 +76,9 @@ export class SequenceMode extends BaseMode {
                     // Correct!
                     this.game.dots.splice(i, 1);
                     this.game.score++;
+
+                    this.game.createPopEffect(dot.x, dot.y, dot.color, `✓ #${dot.text}`, this.currentExpected);
                     this.currentExpected++;
-                    audio.playPop();
-
-                    for (let p = 0; p < 10; p++) {
-                        this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                    }
-
                     this.game.updateHUD();
 
                     // Round complete?
@@ -92,6 +88,8 @@ export class SequenceMode extends BaseMode {
                     }
                 } else {
                     // Wrong order -> Round fails!
+                    audio.playError();
+                    this.game.triggerShake(5.0);
                     this.game.gameOver();
                 }
                 return;

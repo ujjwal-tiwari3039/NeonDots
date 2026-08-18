@@ -24,8 +24,8 @@ export class Renderer {
     }
 
     clear() {
-        // Dark background with slight trailing effect for motion blur
-        this.ctx.fillStyle = 'rgba(5, 5, 16, 0.3)';
+        // Deep background clear
+        this.ctx.fillStyle = '#050510';
         this.ctx.fillRect(0, 0, this.width, this.height);
     }
 }

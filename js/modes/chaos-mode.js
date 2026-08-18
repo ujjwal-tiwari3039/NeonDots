@@ -110,47 +110,39 @@ export class ChaosMode extends BaseMode {
     handleKey(key) {
         const upperKey = key.toUpperCase();
         let hit = false;
-        
+
         for (let i = 0; i < this.game.dots.length; i++) {
             const dot = this.game.dots[i];
             if (dot.text && dot.text === upperKey) {
                 this.game.dots.splice(i, 1);
                 this.game.score += 3; // Bonus for typing in chaos
-                audio.playPop();
-                
-                for (let p = 0; p < 10; p++) {
-                    this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                }
-                
+
+                this.game.createPopEffect(dot.x, dot.y, dot.color, '+3 CHAOS!', 2);
                 this.game.updateHUD();
                 hit = true;
                 break;
             }
         }
-        
+
         // No penalty for wrong key in Chaos mode to prevent unfairness
     }
 
     handleClick(x, y) {
         for (let i = this.game.dots.length - 1; i >= 0; i--) {
             const dot = this.game.dots[i];
-            
+
             // Don't allow clicking typed dots
-            if (dot.text) continue; 
+            if (dot.text) continue;
 
             const dist = Utils.distance(x, y, dot.x, dot.y);
-            
+
             if (dist <= dot.radius * 1.5) {
                 this.game.dots.splice(i, 1);
                 this.game.score++;
-                audio.playPop();
-                
-                for (let p = 0; p < 10; p++) {
-                    this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                }
-                
+
+                this.game.createPopEffect(dot.x, dot.y, dot.color, '+1');
                 this.game.updateHUD();
-                return; 
+                return;
             }
         }
     }

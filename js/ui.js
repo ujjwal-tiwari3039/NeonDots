@@ -101,6 +101,13 @@ export class UIManager {
     showGameOver(score, bestScore, timeFormatted) {
         this.hideAll();
         this.gameOverScore.innerText = score;
+        if (score < 0) {
+            this.gameOverScore.style.color = '#ff3b30';
+            this.gameOverScore.style.textShadow = '0 0 10px #ff3b30, 0 0 20px #ff3b30';
+        } else {
+            this.gameOverScore.style.color = '';
+            this.gameOverScore.style.textShadow = '';
+        }
         this.gameOverBestScore.innerText = bestScore;
         this.gameOverTime.innerText = timeFormatted;
         this.gameOverMenu.classList.add('active');
@@ -108,6 +115,13 @@ export class UIManager {
 
     updateHUD(score, timeFormatted, level) {
         this.hudScore.innerText = score;
+        if (score < 0) {
+            this.hudScore.style.color = '#ff3b30';
+            this.hudScore.style.textShadow = '0 0 10px #ff3b30, 0 0 20px #ff3b30';
+        } else {
+            this.hudScore.style.color = '';
+            this.hudScore.style.textShadow = '';
+        }
         this.hudTime.innerText = timeFormatted;
         this.hudLevel.innerText = level;
     }

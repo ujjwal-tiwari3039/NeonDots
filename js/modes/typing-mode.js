@@ -72,13 +72,10 @@ export class TypingMode extends BaseMode {
                 // Correct!
                 this.game.dots.splice(i, 1);
                 this.combo++;
-                this.game.score += this.combo; // Score based on combo
-                audio.playPop();
+                this.game.score += this.combo;
 
-                for (let p = 0; p < 10; p++) {
-                    this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                }
-
+                const scoreLabel = this.combo > 1 ? `+${this.combo} COMBO!` : '+1';
+                this.game.createPopEffect(dot.x, dot.y, dot.color, scoreLabel, this.combo);
                 this.game.updateHUD();
                 hit = true;
                 break;
@@ -89,8 +86,9 @@ export class TypingMode extends BaseMode {
             // Penalty
             this.combo = 0;
             this.game.score = Math.max(0, this.game.score - 5);
+            audio.playError();
+            this.game.triggerShake(4.0);
             this.game.updateHUD();
-            // Optional: play an error sound
         }
     }
 

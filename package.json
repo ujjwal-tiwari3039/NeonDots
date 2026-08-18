@@ -1,0 +1,19 @@
+{
+  "name": "neon-dots",
+  "version": "1.0.0",
+  "description": "Fast-paced arcade neon clicker game with 9 unique modes and procedural effects.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "game",
+    "canvas",
+    "arcade",
+    "neon",
+    "web-audio"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -67,12 +67,8 @@ export class NumberRushMode extends BaseMode {
             if (dot.text === key) {
                 this.game.dots.splice(i, 1);
                 this.game.score += 2;
-                audio.playPop();
 
-                for (let p = 0; p < 10; p++) {
-                    this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                }
-
+                this.game.createPopEffect(dot.x, dot.y, dot.color, '+2');
                 this.game.updateHUD();
                 hit = true;
                 break;
@@ -81,6 +77,8 @@ export class NumberRushMode extends BaseMode {
 
         if (!hit) {
             this.game.score = Math.max(0, this.game.score - 2);
+            audio.playError();
+            this.game.triggerShake(3.0);
             this.game.updateHUD();
         }
     }

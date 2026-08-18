@@ -70,12 +70,8 @@ export class RandomMode extends BaseMode {
             if (dist <= dot.radius * 1.5) {
                 this.game.dots.splice(i, 1);
                 this.game.score++;
-                audio.playPop();
 
-                for (let p = 0; p < 10; p++) {
-                    this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                }
-
+                this.game.createPopEffect(dot.x, dot.y, dot.color, '+1');
                 this.game.updateHUD();
                 return;
             }

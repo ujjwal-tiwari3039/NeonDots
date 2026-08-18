@@ -1,0 +1,115 @@
+/* Intro Sequence Styles */
+#introScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #030308; /* almost black */
+    z-index: 100; /* above everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+}
+
+#introScreen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#introCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Soft ambient glow behind title */
+    background: radial-gradient(circle, rgba(0, 243, 255, 0.05) 0%, rgba(0,0,0,0) 70%);
+    width: 100vw;
+    height: 100vh;
+}
+
+.intro-title {
+    font-size: 5rem;
+    font-weight: 900;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    display: flex;
+    gap: 0.2rem;
+    /* Scale animation container */
+    transform: scale(0.9);
+    transition: transform 10s ease-out;
+}
+
+.intro-title.zoom {
+    transform: scale(1.1);
+}
+
+.intro-letter {
+    opacity: 0;
+    filter: blur(10px);
+    color: #fff;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #00f3ff,
+        0 0 40px #00f3ff,
+        0 0 80px #0ff;
+    transition: opacity 1.5s ease, filter 1.5s ease, text-shadow 2s ease;
+}
+
+.intro-letter.visible {
+    opacity: 1;
+    filter: blur(0px);
+}
+
+/* Soft pulsing to letters after they appear */
+@keyframes softPulse {
+    0% { opacity: 0.8; text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00f3ff, 0 0 40px #00f3ff; }
+    50% { opacity: 1; text-shadow: 0 0 8px #fff, 0 0 15px #fff, 0 0 30px #00f3ff, 0 0 50px #00f3ff, 0 0 90px #0ff; }
+    100% { opacity: 0.8; text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00f3ff, 0 0 40px #00f3ff; }
+}
+
+.intro-letter.pulse {
+    animation: softPulse 4s infinite ease-in-out alternate;
+}
+
+.intro-prompt {
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    color: #00f3ff;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    opacity: 0;
+    transition: opacity 1s ease;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    position: absolute;
+    bottom: 20%;
+}
+
+@keyframes blinkText {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+}
+
+.intro-prompt.visible {
+    opacity: 1;
+    animation: blinkText 2.5s infinite ease-in-out;
+}

@@ -7,9 +7,45 @@
     <title>Neon Dots</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/intro.css">
+    <link rel="stylesheet" href="css/auth.css">
+
+    <!-- Supabase JS client via importmap (ESM) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+        }
+    }
+    </script>
 </head>
 
 <body>
+    <!-- Auth Screen (populated by auth-ui.js) -->
+    <div id="authScreen"></div>
+
+    <!-- Logout Button (shown when authenticated) -->
+    <button id="logoutBtn" class="hidden">Logout</button>
+
+    <!-- Intro Sequence -->
+    <div id="introScreen" class="intro-screen">
+        <canvas id="introCanvas"></canvas>
+        <div class="intro-content">
+            <h1 id="introTitle" class="intro-title">
+                <span class="intro-letter">N</span>
+                <span class="intro-letter">E</span>
+                <span class="intro-letter">O</span>
+                <span class="intro-letter">N</span>
+                <span class="intro-letter" style="margin: 0 1rem;"> </span>
+                <span class="intro-letter">D</span>
+                <span class="intro-letter">O</span>
+                <span class="intro-letter">T</span>
+                <span class="intro-letter">S</span>
+            </h1>
+            <p id="introPrompt" class="intro-prompt hidden">Press Any Key</p>
+        </div>
+    </div>
+
     <canvas id="gameCanvas"></canvas>
 
     <!-- Main Menu / Mode Select -->
@@ -61,6 +97,12 @@
     </div>
 
     <script type="module" src="js/main.js"></script>
+    <script type="module">
+        import { IntroSequence } from './js/intro.js';
+        new IntroSequence();
+    </script>
+    <!-- Auth UI (must load after DOM elements exist) -->
+    <script type="module" src="js/supabase/auth-ui.js"></script>
 </body>
 
 </html>

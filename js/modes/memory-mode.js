@@ -81,25 +81,23 @@ export class MemoryMode extends BaseMode {
             if (dist <= dot.radius * 2) { // Extremely generous for memory
                 this.game.dots.splice(i, 1);
                 this.game.score++;
-                audio.playPop();
-                
-                for (let p = 0; p < 10; p++) {
-                    this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                }
-                
+
+                this.game.createPopEffect(dot.x, dot.y, dot.color, 'FOUND!');
                 this.game.updateHUD();
                 hit = true;
-                
+
                 if (this.game.dots.length === 0) {
                     this.numDots++;
                     this.startRound();
                 }
-                return; 
+                return;
             }
         }
-        
+
         // If clicked on nothing in recalling state, round fails
         if (!hit) {
+            audio.playError();
+            this.game.triggerShake(5.0);
             this.game.gameOver();
         }
     }

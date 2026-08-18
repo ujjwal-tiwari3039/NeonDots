@@ -82,15 +82,11 @@ export class SurvivalMode extends BaseMode {
             const dot = this.game.dots[i];
             const dist = Utils.distance(x, y, dot.x, dot.y);
 
-            if (dist <= dot.radius * 1.2) {
+            if (dist <= dot.radius * 1.3) {
                 this.game.dots.splice(i, 1);
                 this.game.score++;
-                audio.playPop();
 
-                for (let p = 0; p < 10; p++) {
-                    this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                }
-
+                this.game.createPopEffect(dot.x, dot.y, dot.color, '+1');
                 this.game.updateHUD();
                 return;
             }

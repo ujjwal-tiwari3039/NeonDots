@@ -66,25 +66,23 @@ export class ColorMatchMode extends BaseMode {
         for (let i = this.game.dots.length - 1; i >= 0; i--) {
             const dot = this.game.dots[i];
             const dist = Utils.distance(x, y, dot.x, dot.y);
-            
+
             if (dist <= dot.radius * 1.5) {
                 this.game.dots.splice(i, 1);
-                
+
                 if (dot.color === this.targetColor) {
                     this.game.score += 2;
-                    audio.playPop();
+                    this.game.createPopEffect(dot.x, dot.y, dot.color, '+2 MATCH!');
                 } else {
-                    this.game.score = Math.max(0, this.game.score - 2);
-                    // Play error sound? using playPop for now but maybe lower pitch
-                    audio.playPop(); 
+                    // Allow points to go into negative on wrong dot click
+                    this.game.score -= 2;
+                    audio.playError();
+                    this.game.triggerShake(4.5);
+                    this.game.createPopEffect(dot.x, dot.y, '#ff3b30', '-2 WRONG');
                 }
-                
-                for (let p = 0; p < 10; p++) {
-                    this.game.particles.push(new Particle(dot.x, dot.y, dot.color));
-                }
-                
+
                 this.game.updateHUD();
-                return; 
+                return;
             }
         }
     }
