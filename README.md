@@ -1,3 +1,5 @@
+1.0 version of NronDots https://play-neondots.netlify.app
+1.1 version of NeonDots https://play-neondots1.netlify.app
 # Neon Dots ⚡
 
 A fast-paced, high-aesthetic arcade browser game built with pure HTML5 Canvas, Vanilla CSS, and Web Audio API synthesis.
